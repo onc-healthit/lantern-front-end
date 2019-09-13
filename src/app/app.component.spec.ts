@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { GrafanaVisComponent } from './components/grafana-vis/grafana-vis.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,7 +10,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        GrafanaVisComponent
       ],
     }).compileComponents();
   }));
@@ -30,6 +32,12 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('lantern-app app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('lantern is running!');
   });
+
+  it('should render grafana vis', () => {
+    const fixture = TestBed.createComponent(GrafanaVisComponent);
+    const grafComp = fixture.debugElement.componentInstance;
+    expect(grafComp).toBeTruthy();
+  })
 });
