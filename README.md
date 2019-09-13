@@ -1,13 +1,12 @@
 # lantern-front-end
 
-# Directions for Running
+## Directions for Running
 *  Running the front-end by itself requires running using the angular-cli
 <br> * [Link to the Angular CLI Readme](https://github.com/angular/angular-cli/blob/master/packages/angular/cli/README.md)
 <br> * You can install it with the command `npm install -g @angular/cli` which will install it globally on your computer
 <br> * This requires having Node 8.9+ and NPM 5.5.1+, so you'll have to install those if you don't have them already
 *  From the root of the project, where this file is located, run `npm install`
 <br> * This installs all of the node modules needed based on the package.json
-<br> * You could also install yarn and run `yarn install` instead, which is basically just a faster npm
 *  Now you can run `ng serve`, and the default project should appear at `http://localhost:4200/`
 
 # DEFAULT ANGULAR README BELOW
