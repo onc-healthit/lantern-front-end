@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "12"
+dist: trusty
+sudo: required
+before_script:
+  - npm install -g @angular/cli
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+script:
+- ng lint
+- ng build --prod
+- ng test --watch=false --browsers=ChromeHeadless
