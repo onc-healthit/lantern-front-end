@@ -10,6 +10,8 @@ export class GrafanaVisComponent implements OnInit {
 
   @Input() inputUrl: string;
   public grafanaUrl: SafeResourceUrl;
+  public width = '650';
+  public height = '650';
 
   constructor(private sanitizer: DomSanitizer) {   }
 

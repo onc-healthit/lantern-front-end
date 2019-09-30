@@ -39,5 +39,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(GrafanaVisComponent);
     const grafComp = fixture.debugElement.componentInstance;
     expect(grafComp).toBeTruthy();
-  })
+  });
 });

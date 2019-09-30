@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lantern-app';
-  url1 = 'https://snapshot.raintank.io/dashboard-solo/snapshot/y7zwi2bZ7FcoTlB93WN7yWO4aMiz3pZb?from=1493369923321&to=1493377123321&panelId=4';
+  // tslint:disable-next-line:max-line-length
+  url1 = 'http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/9iJUikcZz/lantern?orgId=1&refresh=30s&from=1569854061884&to=1569854361884&panelId=2';
 }
