@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { GrafanaVisComponent } from './grafana-vis.component';
 
@@ -8,6 +9,9 @@ describe('GrafanaVisComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        LoggerTestingModule
+      ],
       declarations: [ GrafanaVisComponent ]
     })
     .compileComponents();
