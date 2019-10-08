@@ -3,6 +3,8 @@ node_js:
   - "12"
 dist: trusty
 sudo: required
+notifications:
+  email: false
 before_script:
   - npm install -g @angular/cli
   - "export DISPLAY=:99.0"
