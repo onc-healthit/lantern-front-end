@@ -39,3 +39,4 @@ To run with docker:
 1. Build the production version of this project: `ng build --prod`
 2. Build image: `docker build -t angular-nginx .`
 3. Run container: `docker run --name angular-nginx-container -d -p 8090:80 angular-nginx`
+4. Go to `localhost:8090`
