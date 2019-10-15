@@ -19,13 +19,11 @@ To run with the nginx server (on a Mac):
 ### First Time
 1. Install nginx: `brew install nginx`
 2. Copy the local nginx config file `lantern.conf` to `/usr/local/etc/nginx/servers/`
-3. Make `lantern` directory in the nginx file system:
-    - `cd /usr/local/var/www`
-    - `mkdir lantern`
+3. Make `lantern` directory in the nginx file system: `mkdir /usr/local/var/www/lantern`
 
 ### Every Time
-1. Build the production version of this project: `ng build --prod`
-2. Move the `dist` directory so nginx can run it: `mv ./dist/lantern-app/ /usr/local/var/www/lantern/`
+1. Make sure you have built the production version of this project: `ng build --prod`
+2. Copy the `dist` directory so nginx can run it: `cp ./dist/lantern-app/* /usr/local/var/www/lantern/`
 3. Start the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf`
 4. Go to `localhost:8090`
 
