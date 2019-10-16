@@ -28,8 +28,10 @@ To run with the nginx server (on a Mac):
 4. Go to `localhost:8090`
 
 ### Stop the Server
-- To stop the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf -s stop`
-- To stop nginx completely: `sudo nginx -s stop`
+To stop the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf -s stop`
+  - This should be sufficient for stopping `nginx` completely
+  - Check that it has stopped by running:  `ps aux | grep nginx`
+  - If it's still running, try: `sudo nginx -s stop`
 
 ## Docker
 
