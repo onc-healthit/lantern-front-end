@@ -31,7 +31,7 @@ To run with the nginx server (on a Mac):
 To stop the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf -s stop`
   - This should be sufficient for stopping `nginx` completely
   - Check that it has stopped by running:  `ps aux | grep nginx`
-  - If it's still running, try: `sudo nginx -s stop`
+  - If it's still running, try: `kill -QUIT $(cat /usr/local/etc/nginx/nginx.pid)`
 
 ## Docker
 
