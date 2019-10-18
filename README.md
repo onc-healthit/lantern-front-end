@@ -24,14 +24,16 @@ To run with the nginx server (on a Mac):
 ### Every Time
 1. Make sure you have built the production version of this project: `ng build --prod`
 2. Copy the `dist` directory so nginx can run it: `cp ./dist/lantern-app/* /usr/local/var/www/lantern/`
-3. Start the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf`
+3. Start the server:
+  - If you already have nginx running: `sudo nginx -s reload`
+  - If nginx is not running: `sudo nginx`
+  - Or, to be more specific: `sudo nginx -c /usr/local/etc/nginx/nginx.conf`
 4. Go to `localhost:8090`
 
 ### Stop the Server
-To stop the server: `sudo nginx -c /usr/local/etc/nginx/servers/lantern.conf -s stop`
-  - This should be sufficient for stopping `nginx` completely
-  - Check that it has stopped by running:  `ps aux | grep nginx`
-  - If it's still running, try: `kill -QUIT $(cat /usr/local/etc/nginx/nginx.pid)`
+To stop the server:
+  - Option 1: `sudo nginx -c /usr/local/etc/nginx/nginx.conf -s stop`
+  - Option 2: `sudo nginx -s stop`
 
 ## Docker
 
