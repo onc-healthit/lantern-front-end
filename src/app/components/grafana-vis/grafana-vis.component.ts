@@ -5,7 +5,7 @@ import { NGXLogger } from 'ngx-logger';
 @Component({
   selector: 'app-grafana-vis',
   templateUrl: './grafana-vis.component.html',
-  styleUrls: ['./grafana-vis.component.sass']
+  styleUrls: ['./grafana-vis.component.scss']
 })
 export class GrafanaVisComponent implements OnInit {
 

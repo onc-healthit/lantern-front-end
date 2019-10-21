@@ -1,5 +1,14 @@
-<div class="content">
-  <span>lantern is running!</span>
-</div>
+<div class="app-page">
+  <header name="[Lantern]" class="bx--header nav-header">
+    <a class="bx--header__name">Lantern</a>
+  </header>
 
-<app-grafana-vis [inputUrl]=url1></app-grafana-vis>
+  <main class="bx--content main-content">
+    <ibm-tile class="top-tile">
+      <span>lantern is running!</span>
+    </ibm-tile>
+    <ibm-tile>
+      <app-grafana-vis [inputUrl]=url1></app-grafana-vis>
+    </ibm-tile>
+  </main>
+</div>

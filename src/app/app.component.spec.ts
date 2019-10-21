@@ -3,13 +3,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { GrafanaVisComponent } from './components/grafana-vis/grafana-vis.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
+import { UIShellModule, TilesModule } from 'carbon-components-angular';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        LoggerTestingModule
+        LoggerTestingModule,
+        UIShellModule,
+        TilesModule
       ],
       declarations: [
         AppComponent,
@@ -34,7 +37,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('lantern is running!');
+    expect(compiled.querySelector('.top-tile span').textContent).toContain('lantern is running!');
   });
 
   it('should render grafana vis', () => {
