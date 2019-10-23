@@ -11,8 +11,7 @@ export class GrafanaVisComponent implements OnInit {
 
   @Input() inputUrl: string;
   public grafanaUrl: SafeResourceUrl;
-  public width = '650';
-  public height = '650';
+  public height = '300';
 
   constructor(private sanitizer: DomSanitizer, private logger: NGXLogger) {   }
 

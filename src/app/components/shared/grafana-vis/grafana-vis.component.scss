@@ -1,0 +1,11 @@
+@import '@carbon/themes/scss/themes';
+
+:host {
+    display: grid;
+    justify-items: stretch;
+    border: 1px solid $ui-03;
+}
+
+.grafana-vis {
+    padding: 1px;
+}

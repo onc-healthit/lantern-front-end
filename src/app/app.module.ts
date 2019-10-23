@@ -4,7 +4,7 @@ import { LoggerModule } from 'ngx-logger';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GrafanaVisComponent } from './components/grafana-vis/grafana-vis.component';
+import { GrafanaVisComponent } from './components/shared/grafana-vis/grafana-vis.component';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
