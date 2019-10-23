@@ -1,14 +1,7 @@
 <div class="app-page">
-  <header name="[Lantern]" class="bx--header nav-header">
-    <a class="bx--header__name">Lantern</a>
-  </header>
+  <app-page-header class="nav-header"></app-page-header>
 
-  <main class="bx--content main-content">
-    <ibm-tile class="top-tile">
-      <span>lantern is running!</span>
-    </ibm-tile>
-    <ibm-tile>
-      <app-grafana-vis [inputUrl]=url1></app-grafana-vis>
-    </ibm-tile>
-  </main>
+  <router-outlet></router-outlet>
+
+  <app-page-footer></app-page-footer>
 </div>
