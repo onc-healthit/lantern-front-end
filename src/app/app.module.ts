@@ -13,6 +13,9 @@ import { Menu20Module } from '@carbon/icons-angular/lib/menu/20';
 import { LogoGithub20Module } from '@carbon/icons-angular/lib/logo--github/20';
 import { PageHeaderComponent } from './components/shared/page-header/page-header.component';
 import { PageFooterComponent } from './components/shared/page-footer/page-footer.component';
+import { AboutPageComponent } from './components/about-page/about-page.component';
+import { EndpointPageComponent } from './components/endpoint-page/endpoint-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { PageSubHeaderComponent } from './components/shared/page-sub-header/page-sub-header.component';
 
 @NgModule({
@@ -21,6 +24,9 @@ import { PageSubHeaderComponent } from './components/shared/page-sub-header/page
     GrafanaVisComponent,
     PageHeaderComponent,
     PageFooterComponent,
+    AboutPageComponent,
+    EndpointPageComponent,
+    HomePageComponent,
     PageSubHeaderComponent,
   ],
   imports: [
