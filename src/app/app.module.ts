@@ -8,10 +8,9 @@ import { GrafanaVisComponent } from './components/grafana-vis/grafana-vis.compon
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UIShellModule, TilesModule } from 'carbon-components-angular';
-import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
-import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
-import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
+import { UIShellModule, TilesModule, ModalModule } from 'carbon-components-angular';
+import { Menu20Module } from '@carbon/icons-angular/lib/menu/20';
+import { LogoGithub20Module } from '@carbon/icons-angular/lib/logo--github/20';
 
 @NgModule({
   declarations: [
@@ -31,10 +30,10 @@ import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
       // serverLogLevel: environment.serverLogLevel
     }),
     UIShellModule,
-    Notification20Module,
-    UserAvatar20Module,
-    AppSwitcher20Module,
     TilesModule,
+    Menu20Module,
+    ModalModule,
+    LogoGithub20Module
   ],
   providers: [],
   bootstrap: [AppComponent]
