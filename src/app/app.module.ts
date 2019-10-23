@@ -11,11 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { UIShellModule, TilesModule, ModalModule } from 'carbon-components-angular';
 import { Menu20Module } from '@carbon/icons-angular/lib/menu/20';
 import { LogoGithub20Module } from '@carbon/icons-angular/lib/logo--github/20';
+import { PageHeaderComponent } from './components/shared/page-header/page-header.component';
+import { PageFooterComponent } from './components/shared/page-footer/page-footer.component';
+import { PageSubHeaderComponent } from './components/shared/page-sub-header/page-sub-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GrafanaVisComponent,
+    PageHeaderComponent,
+    PageFooterComponent,
+    PageSubHeaderComponent,
   ],
   imports: [
     BrowserModule,

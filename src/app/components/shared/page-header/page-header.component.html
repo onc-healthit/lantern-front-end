@@ -1,0 +1,19 @@
+<header name="[Lantern]" class="bx--header nav-header">
+    <button
+        type="button"
+        [ngClass]="{'bx--header__action--active': active}"
+        class="bx--header__menu-trigger bx--header__action bx--header__menu-toggle">
+        <ibm-icon-menu20 class="icon-formatting"></ibm-icon-menu20>
+    </button>
+    <a class="bx--header__name" routerLink="/" routerLinkActive="active">Lantern</a>
+    <ibm-header-navigation>
+        <ibm-header-item class="menu-spacer"></ibm-header-item>
+        <ibm-header-item routerLink="/endpoints" routerLinkActive="active">Endpoints</ibm-header-item>
+        <ibm-header-item routerLink="/about" routerLinkActive="active">About</ibm-header-item>
+    </ibm-header-navigation>
+    <ibm-header-global>
+		<a href="https://github.com/onc-healthit"><ibm-header-action title="action">
+			<ibm-icon-logo-github20 class="icon-formatting"></ibm-icon-logo-github20>
+		</ibm-header-action></a>
+	</ibm-header-global>
+</header>
