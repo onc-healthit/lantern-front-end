@@ -5,9 +5,9 @@
     grid-gap: 10px 0px;
 
     .endpoint-metrics {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-gap: 0px 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .response-time-header {
