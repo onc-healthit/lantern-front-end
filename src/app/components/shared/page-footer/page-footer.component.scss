@@ -1,8 +1,9 @@
 @import '@carbon/themes/scss/themes';
+@import '_variables.scss';
 
 .footer {
     background-color: $ui-05;
-    padding: 20px 50px;
+    padding: $base-padding 50px;
 
     .lantern-github {
         display: grid;

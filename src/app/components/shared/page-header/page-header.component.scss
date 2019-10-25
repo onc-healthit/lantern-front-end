@@ -1,14 +1,11 @@
-@import '@carbon/colors/scss/colors';
+@import '@carbon/themes/scss/themes';
 
 .icon-formatting {
-    fill: $carbon--cool-gray-10;
+    fill: $ui-01;
     display: grid;
-    align-items: center;
-    justify-items: center;
+    place-items: center;
 }
 
-.menu-spacer {
-    background-color: $carbon--cool-gray-80;
-    margin: 12px 0px;
-    width: 1px;
+.nav-links {
+    margin-left: 1px;
 }

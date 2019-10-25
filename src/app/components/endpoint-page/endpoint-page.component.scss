@@ -1,7 +1,9 @@
+@import '_variables.scss';
+
 .format-body {
-    padding: 60px;
+    padding: $page-padding;
 
     p {
-        padding-bottom: 20px;
+        padding-bottom: $base-padding;
     }
 }
