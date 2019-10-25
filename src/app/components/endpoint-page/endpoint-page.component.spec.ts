@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EndpointPageComponent } from './endpoint-page.component';
+import { PageSubHeaderComponent } from 'src/app/components/shared/page-sub-header/page-sub-header.component';
 
 describe('EndpointPageComponent', () => {
   let component: EndpointPageComponent;
@@ -8,7 +9,7 @@ describe('EndpointPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EndpointPageComponent ]
+      declarations: [ EndpointPageComponent, PageSubHeaderComponent ]
     })
     .compileComponents();
   }));

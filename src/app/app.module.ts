@@ -8,7 +8,7 @@ import { GrafanaVisComponent } from './components/shared/grafana-vis/grafana-vis
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UIShellModule, TilesModule, ModalModule } from 'carbon-components-angular';
+import { UIShellModule, TilesModule, ModalModule, HeaderModule } from 'carbon-components-angular';
 import { Menu20Module } from '@carbon/icons-angular/lib/menu/20';
 import { LogoGithub20Module } from '@carbon/icons-angular/lib/logo--github/20';
 import { PageHeaderComponent } from './components/shared/page-header/page-header.component';
@@ -41,6 +41,7 @@ import { PageSubHeaderComponent } from './components/shared/page-sub-header/page
       // serverLoggingUrl: `${environment.apiUrl}`,
       // serverLogLevel: environment.serverLogLevel
     }),
+    HeaderModule,
     UIShellModule,
     TilesModule,
     Menu20Module,
