@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging, $ } from 'protractor';
+import { browser, logging, $, by, element, $$ } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,10 +8,31 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display Lantern', () => {
     page.navigateTo();
-    const welcome = $('.top-tile').$('span');
-    expect(welcome.getText()).toEqual('lantern is running!');
+    const header = $('.bx--header__name');
+    expect(header.getText()).toEqual('Lantern');
+  });
+
+  it('should navigate to Endpoint page', () => {
+    page.navigateTo();
+    element(by.className('endpoint-link')).click();
+    const subheader = $('.sub-header').$('h1');
+    expect(subheader.getText()).toEqual('FHIR Endpoints');
+  });
+
+  it('should navigate to About page', () => {
+    page.navigateTo();
+    element(by.className('about-link')).click();
+    const subheader = $('.sub-header').$('h1');
+    expect(subheader.getText()).toEqual('About Lantern');
+  });
+
+  it('should navigate to Home page', () => {
+    page.navigateTo();
+    element(by.className('bx--header__name')).click();
+    const homeBody = $$('.home-body h5').first();
+    expect(homeBody.getText()).toEqual('Endpoint Metrics');
   });
 
   afterEach(async () => {

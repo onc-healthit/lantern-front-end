@@ -44,9 +44,15 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('lantern-app');
   });
 
-  it('should render grafana vis', () => {
-    const fixture = TestBed.createComponent(GrafanaVisComponent);
-    const grafComp = fixture.debugElement.componentInstance;
-    expect(grafComp).toBeTruthy();
+  it('should render page header', () => {
+    const fixture = TestBed.createComponent(PageHeaderComponent);
+    const pageHeaderComp = fixture.debugElement.componentInstance;
+    expect(pageHeaderComp).toBeTruthy();
+  });
+
+  it('should render page footer', () => {
+    const fixture = TestBed.createComponent(PageFooterComponent);
+    const pageFooterComp = fixture.debugElement.componentInstance;
+    expect(pageFooterComp).toBeTruthy();
   });
 });
