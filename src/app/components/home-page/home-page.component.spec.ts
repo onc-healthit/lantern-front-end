@@ -27,4 +27,41 @@ describe('HomePageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('rendering endpoints', () => {
+    let iframeElements: NodeListOf<HTMLIFrameElement>;
+
+    beforeEach(() => {
+      const homeElement: HTMLElement = fixture.nativeElement;
+      iframeElements = homeElement.querySelectorAll('iframe');
+    });
+
+    it('should render total endpoint iframe first', () => {
+      expect(iframeElements[0].src).toEqual(component.totalEndpoints);
+    });
+
+    it('should render success iframe second', () => {
+      expect(iframeElements[1].src).toEqual(component.success);
+    });
+
+    it('should render unsuccessful iframe third', () => {
+      expect(iframeElements[2].src).toEqual(component.unsuccessful);
+    });
+
+    it('should render unresponsive iframe fourth', () => {
+      expect(iframeElements[3].src).toEqual(component.unresponsive);
+    });
+
+    it('should render new endpoints iframe fifth', () => {
+      expect(iframeElements[4].src).toEqual(component.newEndpoints);
+    });
+
+    it('should render response time range iframe sixth', () => {
+      expect(iframeElements[5].src).toEqual(component.responseTimeRange);
+    });
+
+    it('should render current response time iframe seventh', () => {
+      expect(iframeElements[6].src).toEqual(component.currentResponseTime);
+    });
+  });
 });

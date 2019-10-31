@@ -14,22 +14,25 @@ describe('workspace-project App', () => {
     expect(header.getText()).toEqual('Lantern');
   });
 
-  it('should navigate to Endpoint page', () => {
+  it('the default page is the Home page', () => {
     page.navigateTo();
+    const homeBody = $$('.home-body h5').first();
+    expect(homeBody.getText()).toEqual('Endpoint Metrics');
+  });
+
+  it('should navigate to Endpoint page', () => {
     element(by.className('endpoint-link')).click();
     const subheader = $('.sub-header').$('h1');
     expect(subheader.getText()).toEqual('FHIR Endpoints');
   });
 
   it('should navigate to About page', () => {
-    page.navigateTo();
     element(by.className('about-link')).click();
     const subheader = $('.sub-header').$('h1');
     expect(subheader.getText()).toEqual('About Lantern');
   });
 
   it('should navigate to Home page', () => {
-    page.navigateTo();
     element(by.className('bx--header__name')).click();
     const homeBody = $$('.home-body h5').first();
     expect(homeBody.getText()).toEqual('Endpoint Metrics');
