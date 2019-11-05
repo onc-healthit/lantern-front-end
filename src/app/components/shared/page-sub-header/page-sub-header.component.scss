@@ -1,0 +1,15 @@
+@import '@carbon/themes/scss/themes';
+@import '_variables.scss';
+
+.sub-header {
+    height: 10rem;
+    background-color: $ui-01;
+    border-bottom: 1px solid $text-02;
+    display: grid;
+    padding-left: $page-padding;
+    padding-bottom: $base-padding;
+
+    h1 {
+        align-self: end;
+    }
+}

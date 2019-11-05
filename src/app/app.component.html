@@ -1,5 +1,7 @@
-<div class="content">
-  <span>lantern is running!</span>
-</div>
+<div class="app-page">
+  <app-page-header class="nav-header"></app-page-header>
 
-<app-grafana-vis [inputUrl]=url1></app-grafana-vis>
+  <router-outlet></router-outlet>
+
+  <app-page-footer></app-page-footer>
+</div>

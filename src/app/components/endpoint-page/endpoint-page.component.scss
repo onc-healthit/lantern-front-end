@@ -1,0 +1,9 @@
+@import '_variables.scss';
+
+.format-body {
+    padding: $page-padding;
+
+    p {
+        padding-bottom: $base-padding;
+    }
+}

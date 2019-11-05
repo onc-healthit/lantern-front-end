@@ -1,0 +1,18 @@
+@import '_variables.scss';
+
+.home-body {
+    margin: 50px $base-padding;
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    grid-gap: 10px 0px;
+
+    .endpoint-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .response-time-header {
+        padding-top: 10px;
+    }
+}

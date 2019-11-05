@@ -4,14 +4,30 @@ import { LoggerModule } from 'ngx-logger';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GrafanaVisComponent } from './components/grafana-vis/grafana-vis.component';
+import { GrafanaVisComponent } from './components/shared/grafana-vis/grafana-vis.component';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+
+import { UIShellModule, TilesModule, ModalModule, HeaderModule } from 'carbon-components-angular';
+import { Menu20Module } from '@carbon/icons-angular/lib/menu/20';
+import { LogoGithub20Module } from '@carbon/icons-angular/lib/logo--github/20';
+import { PageHeaderComponent } from './components/shared/page-header/page-header.component';
+import { PageFooterComponent } from './components/shared/page-footer/page-footer.component';
+import { AboutPageComponent } from './components/about-page/about-page.component';
+import { EndpointPageComponent } from './components/endpoint-page/endpoint-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { PageSubHeaderComponent } from './components/shared/page-sub-header/page-sub-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GrafanaVisComponent
+    GrafanaVisComponent,
+    PageHeaderComponent,
+    PageFooterComponent,
+    AboutPageComponent,
+    EndpointPageComponent,
+    HomePageComponent,
+    PageSubHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +40,13 @@ import { HttpClientModule } from '@angular/common/http';
       // @TODO: Server-side logging is not set up yet.
       // serverLoggingUrl: `${environment.apiUrl}`,
       // serverLogLevel: environment.serverLogLevel
-    })
+    }),
+    HeaderModule,
+    UIShellModule,
+    TilesModule,
+    Menu20Module,
+    ModalModule,
+    LogoGithub20Module
   ],
   providers: [],
   bootstrap: [AppComponent]

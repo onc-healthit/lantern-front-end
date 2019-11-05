@@ -1,0 +1,49 @@
+@import '@carbon/themes/scss/themes';
+@import '_variables.scss';
+
+.footer {
+    background-color: $ui-05;
+    padding: $base-padding 50px;
+
+    .lantern-github {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 10px 15px;
+
+        .top-row-div {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            .github-link {
+                display: flex;
+                align-items: center;
+                width: fit-content;
+    
+                .github-text {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+.health-it {
+    color: $ui-01;
+    justify-self: end;
+    align-self: center;
+}
+
+.icon-formatting {
+    fill: $ui-01;
+    display: grid;
+    place-items: center;
+}
+
+.link-formatting {
+    color: $ui-01;
+    text-decoration: none;
+}
+
+.version-div {
+    color: $ui-01;
+}
