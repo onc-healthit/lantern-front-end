@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,19 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  public dashboardURL = 'http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/ZEcnMHoWk/lantern?orgId=1&refresh=10s&theme=light';
+  public dashboardURL: string;
+  public totalEndpoints = '&panelId=2';
+  public success = '&panelId=6';
+  public unsuccessful = '&panelId=8';
+  public unresponsive = '&panelId=10';
+  // public newEndpoints = '&panelId=20';
+  public responseTimeRange = '&panelId=14';
+  public currentResponseTime = '&panelId=18';
 
-  public totalEndpoints = this.dashboardURL + '&panelId=14';
-  public success = this.dashboardURL + '&panelId=12';
-  public unsuccessful = this.dashboardURL + '&panelId=16';
-  public unresponsive = this.dashboardURL + '&panelId=18';
-  public newEndpoints = this.dashboardURL + '&panelId=20';
-  public responseTimeRange = this.dashboardURL + '&panelId=22';
-  public currentResponseTime = this.dashboardURL + '&panelId=8';
-
-  constructor() { }
+  constructor(private configService: ConfigService) {
+    this.dashboardURL = this.configService.getConfig().grafana_url;
+  }
 
   ngOnInit() {
+  }
+
+  public getUrl(panel: string) {
+    return this.dashboardURL + panel;
   }
 
 }
