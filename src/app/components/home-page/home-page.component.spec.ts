@@ -52,10 +52,6 @@ describe('HomePageComponent', () => {
       expect(iframeElements[3].src).toEqual(component.getUrl(component.unresponsive));
     });
 
-    // it('should render new endpoints iframe fifth', () => {
-    //   expect(iframeElements[4].src).toEqual(component.getUrl(component.newEndpoints));
-    // });
-
     it('should render response time range iframe fifth', () => {
       expect(iframeElements[4].src).toEqual(component.getUrl(component.responseTimeRange));
     });

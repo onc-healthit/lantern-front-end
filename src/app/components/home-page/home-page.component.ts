@@ -13,9 +13,9 @@ export class HomePageComponent implements OnInit {
   public success = '&panelId=6';
   public unsuccessful = '&panelId=8';
   public unresponsive = '&panelId=10';
-  // public newEndpoints = '&panelId=20';
   public responseTimeRange = '&panelId=14';
   public currentResponseTime = '&panelId=18';
+  // @TODO: Add visualization for New Endpionts
 
   constructor(private configService: ConfigService) {
     this.dashboardURL = this.configService.getConfig().grafana_url;
