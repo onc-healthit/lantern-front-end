@@ -6,7 +6,7 @@ sudo: required
 notifications:
   email: false
 env:
-  - GRAFANA_URL="http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/TFdlCHJWk/lantern-dashboard?orgId=1&refresh=10s&theme=light"
+  - LANTERN_GRAFANA_URL="http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/TFdlCHJWk/lantern-dashboard?orgId=1&refresh=10s&theme=light"
 before_script:
   - npm install -g @angular/cli
   - "export DISPLAY=:99.0"

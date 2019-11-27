@@ -11,7 +11,7 @@ const config = convict({
   grafana_url: {
     default: "",
     format: String,
-    env: "GRAFANA_URL"
+    env: "LANTERN_GRAFANA_URL"
   },
 });
 
