@@ -5,7 +5,7 @@ This project reads the following environment variable:
 
 * **LANTERN_GRAFANA_URL**: The grafana dashboard url that is being used for displaying visualizations.
 
-  Default value: http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/TFdlCHJWk/lantern-dashboard?orgId=1&refresh=10s&theme=light
+  Default value: ""
 
 ## Development server
 
