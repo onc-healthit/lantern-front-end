@@ -95,13 +95,13 @@ To run without using the docker-compose command:
 First build the image:
 
 ```bash
-docker build --build-arg cert_dir=./certs -t angular-nginx .`
+docker build --build-arg cert_dir=./certs -t angular-nginx .
 ```
 
 Then run the container:
 
 ```bash
-`docker run --name angular-nginx-container -d -p 8090:80 angular-nginx`
+docker run --name angular-nginx-container -d -p 8090:80 angular-nginx
 ```
 
 Then go to `localhost:8090`
