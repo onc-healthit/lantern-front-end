@@ -41,6 +41,47 @@ To run with the nginx server (on a Mac):
 To stop the server:
   - Option 1: `sudo nginx -c /usr/local/etc/nginx/nginx.conf -s stop`
   - Option 2: `sudo nginx -s stop`
+  
+## Using docker-compose
+
+### Starting the Front-end
+
+**If you have no containers** in your environment from a previous run of docker-compose, run: 
+
+```bash
+docker-compose up
+```
+
+To start the service in the background, add `-d` to your `docker-compose up` command.
+
+**If you already have containers** in your environment from a previous run of docker-compose, run: 
+
+```bash
+docker-compose start
+```
+
+### Stopping the Services
+
+To stop the service and retain the container, run:
+
+```bash
+docker-compose stop
+```
+
+To stop the service and remove the container, run:
+
+```bash
+docker-compose down
+```
+
+To stop the service, remove the container and image, run:
+
+```bash
+docker-compose down --rmi all -v
+```
+
+### Starting Services Behind SSL-Inspecting Proxy
+If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, `docker-compose.yml` includes the location of a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
 
 ## Docker
 
