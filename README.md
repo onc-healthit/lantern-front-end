@@ -83,13 +83,23 @@ docker-compose down --rmi all -v
 ### Starting Services Behind SSL-Inspecting Proxy
 If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, `docker-compose.yml` includes the location of a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
 
-## Docker
+### Docker instructions
 
-To run with docker:
-1. Build the production version of this project: `ng build --prod`
-2. Build image: `docker build -t angular-nginx .`
-3. Run container: `docker run --name angular-nginx-container -d -p 8090:80 angular-nginx`
-4. Go to `localhost:8090`
+To run without using the docker-compose command:
+
+First build the image:
+
+```bash
+docker build --build-arg cert_dir=./certs -t angular-nginx .`
+```
+
+Then run the container:
+
+```bash
+`docker run --name angular-nginx-container -d -p 8090:80 angular-nginx`
+```
+
+Then go to `localhost:8090`
 
 # License
 

@@ -1,4 +1,5 @@
-FROM node:10
+FROM node:12
+ARG cert_dir
 
 # Set working directory
 WORKDIR /app
