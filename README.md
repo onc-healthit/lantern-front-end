@@ -76,7 +76,7 @@ docker-compose down --rmi all -v
 ### Starting Services Behind SSL-Inspecting Proxy
 If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, `docker-compose.yml` includes the location of a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
 
-### Docker instructions
+## Docker instructions
 
 To run without using the docker-compose command:
 
