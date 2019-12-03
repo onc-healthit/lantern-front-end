@@ -1,5 +1,17 @@
 # lantern-front-end
 
+* [Development server](#development-server)
+* [Nginx server](#nginx-server)
+  * [First Time](#first-time)
+  * [Every Time](#every-time)
+  * [Stopping the Services](#stop-the-server)
+* [Using docker-compose](#using-docker-compose)
+  * [Starting the Front-end](#starting-the-front-end)
+  * [Stopping the Front-end](#stopping-the-front-end)
+  * [Starting Services Behind SSL-Inspecting Proxy](#starting-services-behind-ssl-inspecting-proxy)
+* [Docker instructions](#docker-instructions)
+* [License](#license)
+
 ## Development server
 
 Run `ng serve` for the dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -53,7 +65,7 @@ To start the service in the background, add `-d` to your `docker-compose up` com
 docker-compose start
 ```
 
-### Stopping the Services
+### Stopping the Front-end
 
 To stop the service and retain the container, run:
 
