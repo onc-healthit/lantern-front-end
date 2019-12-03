@@ -5,7 +5,7 @@ services:
     container_name: lantern_front_end
     build: 
       context: .
+      args:
+        cert_dir: ./certs
     ports:
       - "8090:80"
-    volumes:
-      - ./certs/:/etc/ssl/certs
