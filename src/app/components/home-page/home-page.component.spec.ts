@@ -37,31 +37,27 @@ describe('HomePageComponent', () => {
     });
 
     it('should render total endpoint iframe first', () => {
-      expect(iframeElements[0].src).toEqual(component.totalEndpoints);
+      expect(iframeElements[0].src).toEqual(component.getUrl(component.totalEndpoints));
     });
 
     it('should render success iframe second', () => {
-      expect(iframeElements[1].src).toEqual(component.success);
+      expect(iframeElements[1].src).toEqual(component.getUrl(component.success));
     });
 
     it('should render unsuccessful iframe third', () => {
-      expect(iframeElements[2].src).toEqual(component.unsuccessful);
+      expect(iframeElements[2].src).toEqual(component.getUrl(component.unsuccessful));
     });
 
     it('should render unresponsive iframe fourth', () => {
-      expect(iframeElements[3].src).toEqual(component.unresponsive);
+      expect(iframeElements[3].src).toEqual(component.getUrl(component.unresponsive));
     });
 
-    it('should render new endpoints iframe fifth', () => {
-      expect(iframeElements[4].src).toEqual(component.newEndpoints);
+    it('should render response time range iframe fifth', () => {
+      expect(iframeElements[4].src).toEqual(component.getUrl(component.responseTimeRange));
     });
 
-    it('should render response time range iframe sixth', () => {
-      expect(iframeElements[5].src).toEqual(component.responseTimeRange);
-    });
-
-    it('should render current response time iframe seventh', () => {
-      expect(iframeElements[6].src).toEqual(component.currentResponseTime);
+    it('should render current response time iframe sixth', () => {
+      expect(iframeElements[5].src).toEqual(component.getUrl(component.currentResponseTime));
     });
   });
 });

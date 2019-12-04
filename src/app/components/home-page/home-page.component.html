@@ -1,13 +1,12 @@
 <div class="home-body">
     <h5>Endpoint Metrics</h5>
     <div class="endpoint-metrics">
-        <app-grafana-vis [inputUrl]=totalEndpoints></app-grafana-vis>
-        <app-grafana-vis [inputUrl]=success></app-grafana-vis>
-        <app-grafana-vis [inputUrl]=unsuccessful></app-grafana-vis>
-        <app-grafana-vis [inputUrl]=unresponsive></app-grafana-vis>
-        <app-grafana-vis [inputUrl]=newEndpoints></app-grafana-vis>
+        <app-grafana-vis [inputUrl]=this.getUrl(totalEndpoints)></app-grafana-vis>
+        <app-grafana-vis [inputUrl]=this.getUrl(success)></app-grafana-vis>
+        <app-grafana-vis [inputUrl]=this.getUrl(unsuccessful)></app-grafana-vis>
+        <app-grafana-vis [inputUrl]=this.getUrl(unresponsive)></app-grafana-vis>
     </div>
     <h5 class="response-time-header">Response Time Metrics</h5>
-    <app-grafana-vis [inputUrl]=responseTimeRange></app-grafana-vis>
-    <app-grafana-vis [inputUrl]=currentResponseTime></app-grafana-vis>
+    <app-grafana-vis [inputUrl]=this.getUrl(responseTimeRange)></app-grafana-vis>
+    <app-grafana-vis [inputUrl]=this.getUrl(currentResponseTime)></app-grafana-vis>
 </div>

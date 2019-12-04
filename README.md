@@ -1,5 +1,12 @@
 # lantern-front-end
 
+## Configuration
+This project reads the following environment variable:
+
+* **LANTERN_GRAFANA_URL**: The grafana dashboard url that is being used for displaying visualizations.
+
+  Default value: ""
+
 ## Development server
 
 Run `ng serve` for the dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
