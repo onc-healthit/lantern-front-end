@@ -5,7 +5,7 @@ ARG cert_dir
 WORKDIR /app
 
 RUN update-ca-certificates
-RUN yarn config set cafile /etc/ssl/certs/ca-certificates.crt
+RUN yarn config set cafile /usr/local/share/ca-certificates/ca-certificates.crt
 
 # Install app dependencies
 COPY package.json /app/package.json
