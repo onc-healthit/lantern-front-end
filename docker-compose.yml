@@ -6,6 +6,8 @@ services:
     build: 
       context: .
       args:
-        cert_dir: ./certs
+        certs: --certs
+    volumes:
+      - ./certs/:/usr/local/share/ca-certificates/
     ports:
       - "8090:80"

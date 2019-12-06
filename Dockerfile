@@ -1,27 +1,15 @@
-FROM node:12
-ARG cert_dir
+FROM node:12 AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Add certs and configure yarn
-#COPY ${cert_dir}/ /usr/local/share/ca-certificates/
-RUN update-ca-certificates
-RUN ls /usr/local/share/ca-certificates/
-RUN yarn config set cafile /usr/local/share/ca-certificates/ca-certificates.crt
-
-# Install app dependencies
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-RUN yarn install
-RUN yarn global add @angular/cli@8.3.12
-
-# Add App and build
 COPY . /app
-RUN ng build
+
+RUN chmod +x /app/setup_environment.sh
+ENTRYPOINT ["/app/setup_environment.sh"]
 
 FROM nginx
 
 # Copy build and configuration file for nginx
-COPY --from=0 /app/dist/lantern-app/ /usr/share/nginx/html/
+COPY --from=builder /app/dist/lantern-app/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/nginx.conf
