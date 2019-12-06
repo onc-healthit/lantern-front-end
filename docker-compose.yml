@@ -5,8 +5,6 @@ services:
     container_name: lantern_front_end
     build: 
       context: .
-      args:
-        certs: --certs
     volumes:
       - ./certs/:/usr/local/share/ca-certificates/
     ports:
