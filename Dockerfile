@@ -5,7 +5,7 @@ ARG cert_dir
 WORKDIR /app
 
 # Add certs and configure yarn
-#COPY ${cert_dir}/ /usr/local/share/ca-certificates/
+COPY ${cert_dir}/ /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 RUN yarn config set cafile /usr/local/share/ca-certificates/ca-certificates.crt
 
