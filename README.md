@@ -7,11 +7,8 @@
   * [First Time](#first-time)
   * [Every Time](#every-time)
   * [Stopping the Services](#stop-the-server)
-* [Using docker-compose](#using-docker-compose)
-  * [Starting the Front-end](#starting-the-front-end)
-  * [Stopping the Front-end](#stopping-the-front-end)
-  * [Starting Services Behind SSL-Inspecting Proxy](#starting-services-behind-ssl-inspecting-proxy)
 * [Docker instructions](#docker-instructions)
+  * [Starting Services Behind SSL-Inspecting Proxy](#starting-services-behind-ssl-inspecting-proxy)
 * [License](#license)
 
 ## Configuration
@@ -55,47 +52,6 @@ To run with the nginx server (on a Mac):
 To stop the server:
   - Option 1: `sudo nginx -c /usr/local/etc/nginx/nginx.conf -s stop`
   - Option 2: `sudo nginx -s stop`
-  
-## Using docker-compose
-
-### Starting the Front-end
-
-**If you have no containers** in your environment from a previous run of docker-compose, run: 
-
-```bash
-docker-compose up
-```
-
-To start the service in the background, add `-d` to your `docker-compose up` command.
-
-**If you already have containers** in your environment from a previous run of docker-compose, run: 
-
-```bash
-docker-compose start
-```
-
-### Stopping the Front-end
-
-To stop the service and retain the container, run:
-
-```bash
-docker-compose stop
-```
-
-To stop the service and remove the container, run:
-
-```bash
-docker-compose down
-```
-
-To stop the service, remove the container and image, run:
-
-```bash
-docker-compose down --rmi all -v
-```
-
-### Starting Services Behind SSL-Inspecting Proxy
-If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, `docker-compose.yml` includes the location of a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
 
 ## Docker instructions
 
@@ -104,16 +60,19 @@ To run without using the docker-compose command:
 First build the image:
 
 ```bash
-docker build --build-arg cert_dir=./certs -t angular-nginx .
+docker build --build-arg cert_dir=./certs -t lantern_front_end .
 ```
 
 Then run the container:
 
 ```bash
-docker run --name angular-nginx-container -d -p 8090:80 angular-nginx
+docker run --name lantern_front_end_container -d -p 8090:80 lantern_front_end
 ```
 
 Then go to `localhost:8090`
+
+### Starting Services Behind SSL-Inspecting Proxy
+If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, the `docker build` command requires a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
 
 # License
 
