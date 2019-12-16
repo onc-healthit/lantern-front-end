@@ -9,6 +9,7 @@
   * [Stopping the Services](#stop-the-server)
 * [Docker instructions](#docker-instructions)
   * [Starting Services Behind SSL-Inspecting Proxy](#starting-services-behind-ssl-inspecting-proxy)
+  * [Pushing to the Docker Hub Repository](#pushing-to-the-docker-hub-repository)
 * [License](#license)
 
 ## Configuration
@@ -73,6 +74,20 @@ Then go to `localhost:8090`
 
 ### Starting Services Behind SSL-Inspecting Proxy
 If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, the `docker build` command requires a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.**
+
+### Pushing to the Docker Hub Repository
+To push the front-end to our [Docker Hub public repository](https://hub.docker.com/repository/docker/onchealthit/lantern-front-end), run:
+
+```
+docker build -t <image name> .
+docker tag <image name> onchealthit/lantern-front-end
+docker push onchealthit/lantern-front-end
+```
+
+You can also combine steps one and two by running:
+```
+docker build -t onchealthit/lantern-front-end .
+```
 
 # License
 
