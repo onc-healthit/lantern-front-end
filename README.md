@@ -1,5 +1,17 @@
 # lantern-front-end
 
+
+* [Configuration](#configuration)
+* [Development server](#development-server)
+* [Nginx server](#nginx-server)
+  * [First Time](#first-time)
+  * [Every Time](#every-time)
+  * [Stopping the Services](#stop-the-server)
+* [Docker instructions](#docker-instructions)
+  * [Starting Services Behind SSL-Inspecting Proxy](#starting-services-behind-ssl-inspecting-proxy)
+  * [Pushing to the Docker Hub Repository](#pushing-to-the-docker-hub-repository)
+* [License](#license)
+
 ## Configuration
 This project reads the following environment variable:
 
@@ -42,13 +54,40 @@ To stop the server:
   - Option 1: `sudo nginx -c /usr/local/etc/nginx/nginx.conf -s stop`
   - Option 2: `sudo nginx -s stop`
 
-## Docker
+## Docker instructions
 
-To run with docker:
-1. Build the production version of this project: `ng build --prod`
-2. Build image: `docker build -t angular-nginx .`
-3. Run container: `docker run --name angular-nginx-container -d -p 8090:80 angular-nginx`
-4. Go to `localhost:8090`
+To run without using the docker-compose command:
+
+First build the image:
+
+```bash
+docker build --build-arg cert_dir=./certs -t lantern_front_end .
+```
+
+Then run the container:
+
+```bash
+docker run --name lantern_front_end_container -d -p 8090:80 lantern_front_end
+```
+
+Then go to `localhost:8090`
+
+### Starting Services Behind SSL-Inspecting Proxy
+If you are operating behind a proxy that does SSL-Inspection, yarn needs to be configured with the certificates that are used by the proxy in the image. Currently, the `docker build` command requires a `certs` directory as an argument to the `Dockerfile`. If you are operating behind an SSL-Inspecting proxy **you will have to copy your certificates into this directory.** The `Dockerfile` also expects that the root certificate will exist as part of the file `ca-certificates.crt`.
+
+### Pushing to the Docker Hub Repository
+To push the front-end to our [Docker Hub public repository](https://hub.docker.com/repository/docker/onchealthit/lantern-front-end), run:
+
+```
+docker build -t <image name> .
+docker tag <image name> onchealthit/lantern-front-end
+docker push onchealthit/lantern-front-end
+```
+
+You can also combine steps one and two by running:
+```
+docker build -t onchealthit/lantern-front-end .
+```
 
 # License
 
