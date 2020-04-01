@@ -8,7 +8,7 @@ notifications:
 env:
   - LANTERN_GRAFANA_URL="http://ec2-3-228-127-99.compute-1.amazonaws.com/d-solo/TFdlCHJWk/lantern-dashboard?orgId=1&refresh=10s&theme=light"
 before_script:
-  - yarn global add @angular/cli
+  - yarn global add @angular/cli@8.3.26
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script:
