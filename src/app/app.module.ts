@@ -18,6 +18,7 @@ import { EndpointPageComponent } from './components/endpoint-page/endpoint-page.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { PageSubHeaderComponent } from './components/shared/page-sub-header/page-sub-header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFoundMessageComponent } from './components/shared/page-not-found-message/page-not-found-message.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HomePageComponent,
     PageSubHeaderComponent,
     PageNotFoundComponent,
+    PageNotFoundMessageComponent,
   ],
   imports: [
     BrowserModule,

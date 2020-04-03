@@ -1,0 +1,14 @@
+@import '_variables.scss';
+
+:host {
+    display: grid;
+    justify-content: center;
+
+    h1 {
+        padding-bottom: $base-padding;
+    }
+
+    p {
+        text-align: center;
+    }
+}
