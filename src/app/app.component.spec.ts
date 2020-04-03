@@ -10,6 +10,7 @@ import { GrafanaVisComponent } from './components/shared/grafana-vis/grafana-vis
 import { PageFooterComponent } from './components/shared/page-footer/page-footer.component';
 import { PageHeaderComponent } from './components/shared/page-header/page-header.component';
 import { PageSubHeaderComponent } from './components/shared/page-sub-header/page-sub-header.component';
+import { ItemNotFoundMessageComponent } from './components/shared/item-not-found-message/item-not-found-message.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -28,6 +29,7 @@ describe('AppComponent', () => {
         PageFooterComponent,
         PageHeaderComponent,
         PageSubHeaderComponent,
+        ItemNotFoundMessageComponent
       ],
     }).compileComponents();
   }));
