@@ -6,6 +6,17 @@
     border: 1px solid $ui-03;
 }
 
+.error-class {
+    height: 300px;
+    display: grid;
+    align-items: center;
+    margin: 0px 10px;
+}
+
 .grafana-vis {
     padding: 1px;
+}
+
+.if-div {
+    justify-self: center;
 }

@@ -1,2 +1,6 @@
-<iframe [src]=grafanaUrl height="{{height}}" class="grafana-vis">
-</iframe>
+<div *ngIf="!valid; else elseBlock" class="if-div">
+    <div class="grafana-vis error-class">
+        <app-page-not-found-message displayVal="iframe's url"></app-page-not-found-message>
+    </div>
+</div>
+<ng-template #elseBlock><iframe [src]=grafanaUrl height="{{height}}" class="grafana-vis"></iframe></ng-template>
