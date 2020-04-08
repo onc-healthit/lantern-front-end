@@ -38,6 +38,12 @@ describe('workspace-project App', () => {
     expect(homeBody.getText()).toEqual('Endpoint Metrics');
   });
 
+  it('should navigate to 404 page', () => {
+    browser.get(browser.baseUrl + 'randomstring');
+    const homeBody = $$('.format-body h1').first();
+    expect(homeBody.getText()).toEqual('404 Not Found');
+  });
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);

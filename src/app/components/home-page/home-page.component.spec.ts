@@ -3,6 +3,7 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { HomePageComponent } from './home-page.component';
 import { GrafanaVisComponent } from 'src/app/components/shared/grafana-vis/grafana-vis.component';
+import { ItemNotFoundMessageComponent } from '../shared/item-not-found-message/item-not-found-message.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -13,7 +14,7 @@ describe('HomePageComponent', () => {
       imports: [
         LoggerTestingModule
       ],
-      declarations: [ HomePageComponent, GrafanaVisComponent ]
+      declarations: [ HomePageComponent, GrafanaVisComponent, ItemNotFoundMessageComponent ]
     })
     .compileComponents();
   }));

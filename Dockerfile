@@ -13,7 +13,7 @@ RUN yarn config set cafile /etc/ssl/certs/ca-certificates.crt
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 RUN yarn install
-RUN yarn global add @angular/cli@8.3.12
+RUN yarn global add @angular/cli@8.3.26
 
 # Add App and build
 COPY . /app

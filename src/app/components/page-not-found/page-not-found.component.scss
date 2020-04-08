@@ -1,0 +1,16 @@
+@import '_variables.scss';
+
+.format-body {
+    padding: $page-padding;
+    display: grid;
+
+    .home-button {
+        margin-top: 40px;
+        padding: 10px;
+    }
+
+    p, .message {
+        padding-bottom: $base-padding;
+        justify-self: center;
+    }
+}

@@ -15,7 +15,7 @@
 ## Configuration
 This project reads the following environment variable:
 
-* **LANTERN_GRAFANA_URL**: The grafana dashboard url that is being used for displaying visualizations.
+* **LANTERN_GRAFANA_URL**: The grafana dashboard url that is being used for displaying visualizations. **Note**: The given url should start with either `http` or `https`.
 
   Default value: ""
 
