@@ -192,5 +192,221 @@ WHERE
         </li>
     </ul>
 
+    <h2>Conformance Statement "software.name" and "software.version" fields used inconsistently</h2>
+
+    <p>
+        This observation is based from analysis of FHIR endpoints performed on April 22, 2020 using the <a href="https://github.com/onc-healthit/lantern-back-end/tree/master">master branch</a>. These FHIR endpoints primarily use FHIR DSTU2.
+    </p>
+
+    <p>
+        The "software" field in the <a href="https://www.hl7.org/fhir/DSTU2/conformance.html">FHIR DSTU2 Conformance Statement</a> is <a href="https://www.hl7.org/fhir/DSTU2/conformance-definitions.html#Conformance.software">defined</a> as: 
+    </p>
+    <blockquote>
+        Software that is covered by this conformance statement. It is used when the conformance statement describes the capabilities of a particular software version, independent of an installation.
+    </blockquote>
+	
+    <p>
+        The "software.name" field in the <a href="https://www.hl7.org/fhir/DSTU2/conformance.html">FHIR DSTU2 Conformance Statement</a> is <a href="https://www.hl7.org/fhir/DSTU2/conformance-definitions.html#Conformance.software.name">defined</a> as: 
+    </p>
+    <blockquote>
+        Name software is known by.
+    </blockquote>
+
+    <p>
+        The "software.version" field in the <a href="https://www.hl7.org/fhir/DSTU2/conformance.html">FHIR DSTU2 Conformance Statement</a> is <a href="https://www.hl7.org/fhir/DSTU2/conformance-definitions.html#Conformance.software.version">defined</a> as: 
+    </p>
+    <blockquote>
+        The version identifier for the software covered by this statement.
+    </blockquote>
+
+    <p>
+        Ideally, the "software.name" and "software.version" fields would align with the "Product" and "Version" fields in <a href="https://chpl.healthit.gov/#/search">CHPL</a>, allowing Lantern and other users to identify the software product associated with the endpoint.
+    </p>
+
+    <p>
+        The Lantern team found that MediTech and Cerner did not use the "software" field in the Conformance Statement.
+    </p>
+
+    <p>
+        The Lantern team found the following "software.name" and "software.version" values being used:
+    </p>
+
+    <pre>
+        <code>
+                list_source                 |          vendor          |  software_name  | software_version | count 
+--------------------------------------------+--------------------------+-----------------+------------------+-------
+ CareEvolution                              | Allscripts               | Allscripts FHIR | 19.4.121.0       |     1
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | August 2019     | 8.9.0.1          |   100
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Duke FHIR 2017  | 1.0.0            |     1
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2015       | 8.2.2            |     1
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2017       | 8.3.0.4          |     2
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2018       | 8.4.0.4          |     7
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2019   | 8.7.0.1          |    47
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2020   | 9.2.0.1          |     1
+ CareEvolution                              | CareEvolution, Inc.      | HIEBus          | 26.18.0.18844    |     8
+ CareEvolution                              | CareEvolution, Inc.      | HIEBus          | 28.0.0.19306     |     1
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | May 2019        | 8.8.0.1          |   113
+ https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | November 2019   | 9.1.0.1          |    67
+ CareEvolution                              | eClinicalWorks           | eClinicalWorks  | 2.01             |     2
+        </code>
+    </pre>
+
+    <p>
+        None of these had an exact software name and version match to the information stored in CHPL. "HIEBus" and "eClinicalWorks" had name matches but did not have version matches. "Allscripts FHIR" had a partial match with a version match. None of the Epic "software.name" fields matched the product information in CHPL.  However, of the Epic "software.name" fields except for "Duke FHIR 2017" aligned with version fields contained in CHPL.
+    </p>
+
+    <p>
+        Possible challenges that vendors may face when documenting their software name and version in the Conformance Statement include:
+    </p>
+
+    <ul>
+        <li><p>A corporation may have a business version and a software version for the product. For instance, the CareEvolution product HIEBus has "26.18.0.18844" and "28.0.0.19306" as "software.version" values in the Conformance Statement, and "2014 Edition Core" and "2015 Edition Core" as "Version" values in CHPL. Perhaps the version in the Conformance Statement is the software version and the version in CHPL is the business version.</p></li>
+        <li><p>The Conformance Statement only allows a single software entry. For example, perhaps Epic has multiple software modules that each need to be accredited separately but can be used together with a single endpoint. This limits how Epic can reference its software products within the Conformance Statement.</p></li>
+    </ul>
+
+    <h3>
+        Details:
+    </h3>
+
+    <p>
+        As of April 22, 2020:
+    </p>
+    <ul>
+        <li>
+            <p>Vendors that do not include "software" in the Conformance Statement:</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+                    select list_source, vendor, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is null group by list_source, vendor;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>Vendors that do include "software" in the Conformance Statement:</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+                    select list_source, vendor, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null group by list_source, vendor;
+                </code>
+            </pre>
+            <p>Note: two of these have unlisted vendors. The missing vendor with the list source "https://open.epic.com/MyApps/EndpointsJson" is "Epic Systems Corporation". The missing vendor with list source "CareEvolution" is "eClinicalWorks".</p>
+        </li>
+        <li>
+            <p>Software names and versions:</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+                    select list_source, vendor, capability_statement::json -> 'software' ->> 'name' as software_name, capability_statement::json -> 'software' ->> 'version' as software_version, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null group by list_source, vendor, capability_statement::json -> 'software' ->> 'name', capability_statement::json -> 'software' ->> 'version';
+                </code>
+            </pre>
+            <p>The Lantern team looked searched for these software names with the given version and found the following:</p>
+            <ul>
+                <li>Allscripts FHIR - no complete match. many partial matches (products starting with allscripts). one partial match also matches version.</li>
+                <li>August 2019 - no matches. does match version for several products.</li>
+                <li>Duke FHIR 2017 - no matches.</li>
+                <li>Epic 2015 - no matches. does match version for several withdrawn products.</li>
+                <li>Epic 2017 - no matches. does match version for several withdrawn products.</li>
+                <li>Epic 2018 - no matches. does match version for several products.</li>
+                <li>February 2019 - no matches. does match version for several products.</li>
+                <li>February 2020 - no matches. does match version for several products.</li>
+                <li>May 2019 - no matches. does match version for several products.</li>
+                <li>November 2019 - no matches. does match version for several products.</li>
+                <li>HIEBus - complete match. version doesn't match.</li>
+                <li>eClinicalWorks - complete match. version doesn't match.</li>
+            </ul>
+        </li>
+    </ul>
+
 </div>
 
+total count = 1550
+select count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null;
+
+no software: 1199
+select count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is null;
+
+no software vendors:
+select list_source, vendor, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is null group by list_source, vendor;
+
+list_source                 |                     vendor                      | count 
+--------------------------------------------+-------------------------------------------------+-------
+ CareEvolution                              | Cerner Corporation                              |     4
+ CareEvolution                              | Medical Information Technology, Inc. (MEDITECH) |     3
+ https://github.com/cerner/ignite-endpoints | Cerner Corporation                              |  1192
+
+ software vendors:
+ select list_source, vendor, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null group by list_source, vendor;
+ list_source                 |          vendor          | count 
+ --------------------------------------------+--------------------------+-------
+  CareEvolution                              | CareEvolution, Inc.      |     9
+  CareEvolution                              |                          |     2
+  CareEvolution                              | Allscripts               |     1
+  https://open.epic.com/MyApps/EndpointsJson |                          |     1
+  https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation |   338
+ 
+to find source of non-vendor id'd endpoints:
+ select list_source, vendor, url from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null and list_source = 'CareEvolution';
+ list_source  |       vendor        |                                 url                                 
+ ---------------+---------------------+---------------------------------------------------------------------
+  CareEvolution |                     | https://fhir.healow.com/FHIRServer/fhir/IGCGAD/
+  CareEvolution | CareEvolution, Inc. | https://sepa.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://sfnj.patient.trinity-health.org/api/fhir/
+  CareEvolution | Allscripts          | https://fhir.fhirpoint.open.allscripts.com/fhirroute/fhir/10028551/
+  CareEvolution | CareEvolution, Inc. | https://hcfl.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://ollnj.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://sphsma.patient.trinity-health.org/api/fhir/
+  CareEvolution |                     | https://fhir.healow.com/FHIRServer/fhir/BGJABA/
+  CareEvolution | CareEvolution, Inc. | https://spny.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://smga.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://smpa.patient.trinity-health.org/api/fhir/
+  CareEvolution | CareEvolution, Inc. | https://fhir.careevolution.com/Master.Adapter1.WebClient/api/fhir/
+
+  Querying those endpoints: got eClinicalWorks for the two missing endpoints.
+
+
+  stored values:
+  select list_source, vendor, capability_statement::json -> 'software' ->> 'name' as software_name, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null group by list_source, vendor, capability_statement::json -> 'software' ->> 'name';
+  list_source                 |          vendor          |  software_name  | count 
+  --------------------------------------------+--------------------------+-----------------+-------
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2017       |     2
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2019   |    47
+   https://open.epic.com/MyApps/EndpointsJson |                          | Duke FHIR 2017  |     1
+   CareEvolution                              | Allscripts               | Allscripts FHIR |     1
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | August 2019     |   100
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | May 2019        |   113
+   CareEvolution                              | CareEvolution, Inc.      | HIEBus          |     9
+   CareEvolution                              |                          | eClinicalWorks  |     2
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | November 2019   |    67
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2015       |     1
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2020   |     1
+   https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2018       |     7
+
+   select list_source, vendor, capability_statement::json -> 'software' ->> 'name' as software_name, capability_statement::json -> 'software' ->> 'version' as software_version, count(*) from fhir_endpoints where capability_statement::json ->> 'fhirVersion' is not null and capability_statement::json ->> 'software' is not null group by list_source, vendor, capability_statement::json -> 'software' ->> 'name', capability_statement::json -> 'software' ->> 'version';
+   list_source                 |          vendor          |  software_name  | software_version | count 
+   --------------------------------------------+--------------------------+-----------------+------------------+-------
+    CareEvolution                              | Allscripts               | Allscripts FHIR | 19.4.121.0       |     1
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | August 2019     | 8.9.0.1          |   100
+    https://open.epic.com/MyApps/EndpointsJson |                          | Duke FHIR 2017  | 1.0.0            |     1
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2015       | 8.2.2            |     1
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2017       | 8.3.0.4          |     2
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | Epic 2018       | 8.4.0.4          |     7
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2019   | 8.7.0.1          |    47
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | February 2020   | 9.2.0.1          |     1
+    CareEvolution                              | CareEvolution, Inc.      | HIEBus          | 26.18.0.18844    |     8
+    CareEvolution                              | CareEvolution, Inc.      | HIEBus          | 28.0.0.19306     |     1
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | May 2019        | 8.8.0.1          |   113
+    https://open.epic.com/MyApps/EndpointsJson | Epic Systems Corporation | November 2019   | 9.1.0.1          |    67
+    CareEvolution                              |                          | eClinicalWorks  | 2.01             |     2
+
+    allscripts fhir - no complete match. many partial matches (products starting with allscripts). one partial match also matches version.
+    august 2019 - no matches. does match version for several products.
+    duke fhir 2017 - no matches.
+    epic 2015 - no matches. does match version for several withdrawn products.
+    epic 2017 - no matches. does match version for several withdrawn products.
+    epic 2018 - no matches. does match version for several products.
+    february 2019 - no matches. does match version for several products.
+    februar 2020 - no matches. does match version for several products.
+    may 2019 - no matches. does match version for several products.
+    november 2019 - no matches. does match version for several products.
+    hiebus - complete match. version doesn't match.
+    eclinicalworks - complete match. version doesn't match.
