@@ -1,35 +1,196 @@
 <app-page-sub-header header="FHIR Endpoints"></app-page-sub-header>
 
 <div class="format-body">
+
     <p>
         Statement about how Lantern visits FHIR endpoints, how those endpoints are added to Lantern’s 
         list of endpoints, what Lantern does with the information, etc.
     </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-        labore et dolore magna aliqua. Leo vel fringilla est ullamcorper. In est ante in nibh. 
-        Fermentum iaculis eu non diam phasellus vestibulum lorem sed. Justo nec ultrices dui sapien 
-        eget mi proin sed libero. Amet consectetur adipiscing elit duis tristique sollicitudin. 
-        Ornare lectus sit amet est placerat in egestas erat imperdiet. Volutpat lacus laoreet non curabitur.
-        Posuere sollicitudin aliquam ultrices sagittis. Est velit egestas dui id. Dictum fusce ut placerat
-        orci nulla pellentesque dignissim. Donec massa sapien faucibus et molestie ac feugiat sed lectus.
-    </p>
+
+    <h1>Observations</h1>
+
+    <h2>Conformance Statement "date" field being overwritten at time of access for some endpoints</h2>
+
     <p>
-        Dictumst quisque sagittis purus sit amet. Est ullamcorper eget nulla facilisi etiam dignissim.
-        Varius sit amet mattis vulputate enim nulla aliquet porttitor. Neque laoreet suspendisse interdum
-        consectetur libero id faucibus nisl tincidunt. Nisi lacus sed viverra tellus in. Proin sed libero
-        enim sed faucibus. In fermentum et sollicitudin ac orci phasellus egestas. Nibh tortor id aliquet
-        lectus proin nibh nisl. Ut sem nulla pharetra diam sit. Ac auctor augue mauris augue neque gravida in.
+        This observation is based from analysis of FHIR endpoints performed on April 20, 2020 using the <a href="https://github.com/onc-healthit/lantern-back-end/tree/audit">audit branch</a>. These FHIR endpoints primarily use FHIR DSTU2.
     </p>
+
     <p>
-        Enim blandit volutpat maecenas volutpat. In dictum non consectetur a erat nam at lectus urna.
-        Congue quisque egestas diam in arcu cursus euismod quis viverra. Elementum nisi quis eleifend quam
-        adipiscing vitae. Condimentum mattis pellentesque id nibh tortor id aliquet lectus proin.
-        Nisl pretium fusce id velit ut tortor pretium viverra. Pulvinar etiam non quam lacus suspendisse
-        faucibus. Arcu cursus vitae congue mauris rhoncus aenean. Et egestas quis ipsum suspendisse ultrices
-        gravida dictum fusce. Hac habitasse platea dictumst vestibulum rhoncus est. Eleifend donec pretium
-        vulputate sapien nec sagittis aliquam malesuada bibendum. Gravida arcu ac tortor dignissim convallis
-        aenean et. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Felis bibendum ut
-        tristique et egestas quis ipsum. Vitae et leo duis ut diam quam. In cursus turpis massa tincidunt dui
-        ut ornare lectus sit. Velit dignissim sodales ut eu sem integer vitae justo.
+        The "date" field in the <a href="https://www.hl7.org/fhir/DSTU2/conformance.html">FHIR DSTU2 Conformance Statement</a> is <a href="https://www.hl7.org/fhir/DSTU2/conformance-definitions.html#Conformance.date">defined</a> as: 
     </p>
+    <blockquote>
+        The date (and optionally time) when the conformance statement was published. The date must change when the business version changes, if it does, and it must change if the status code changes. In addition, it should change when the substantive content of the conformance statement changes.
+    </blockquote>
+
+    <p>
+        This definition indicates that the date:
+    </p>
+    <ul>
+        <li><p>SHALL change if the business version changes</p></li>
+        <li><p>SHALL change if the status code changes</p></li>
+        <li><p>SHOULD change if the conformance statement content changes</p></li>
+    </ul>
+
+    <p>
+        The Lantern team observed that endpoints from the vendor Epic Systems Corporation change the date each time the capability statement is retrieved. Of the 345 responsive Epic endpoints, 336 overwrote dates with the date the capability statement was retrieved.
+    </p>
+
+    <h3>
+        Details:
+    </h3>
+
+    <p>
+        As of April 20, 2020:
+    </p>
+    <ul>
+        <li>
+            <p>Only Epic endpoints are overwriting dates when the Conformance Statement is retrieved</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT 
+    DISTINCT row_data -> 'list_source' AS list_source
+FROM audit.logged_actions 
+WHERE
+    (row_data -> 'capability_statement')::json -> 'date' IS NOT NULL
+    AND
+    (changed_fields -> 'capability_statement')::json ->> 'date' <> (row_data -> 'capability_statement')::json ->> 'date'
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>360 Epic endpoints were retrieved from https://open.epic.com/MyApps/EndpointsJson</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT COUNT(*)
+FROM fhir_endpoints 
+WHERE list_source = 'https://open.epic.com/MyApps/EndpointsJson'
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>345 Epic endpoints returned a query successfully</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT COUNT(*)
+FROM fhir_endpoints
+WHERE 
+    list_source = 'https://open.epic.com/MyApps/EndpointsJson'
+    AND
+    http_response = 200
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>336 Epic endpoints overwrote the "date" field in the Conformance Statement</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT 
+    COUNT(DISTINCT row_data -> 'id')
+FROM audit.logged_actions 
+WHERE
+    (row_data -> 'capability_statement')::json -> 'date' IS NOT NULL
+    AND
+    (changed_fields -> 'capability_statement')::json ->> 'date' <> (row_data -> 'capability_statement')::json ->> 'date'
+;
+                </code>
+            </pre>
+        </li>
+    </ul>
+
+    <h2>Conformance Statement "developer" field left unpopulated for some endpoints</h2>
+
+    <p>
+        This observation is based from analysis of FHIR endpoints performed on April 22, 2020 using the <a href="https://github.com/onc-healthit/lantern-back-end/tree/master">master branch</a>. These FHIR endpoints primarily use FHIR DSTU2.
+    </p>
+
+    <p>
+        The "publisher" field in the <a href="https://www.hl7.org/fhir/DSTU2/conformance.html">FHIR DSTU2 Conformance Statement</a> is <a href="https://www.hl7.org/fhir/DSTU2/conformance-definitions.html#Conformance.publisher">defined</a> as: 
+    </p>
+    <blockquote>
+        The name of the individual or organization that published the conformance.
+    </blockquote>
+
+    <p>
+        The "publisher" field is a valuable information source to identify the vendor organization responsible for the endpoint, especially as endpoint source lists are centralized and contain endpoints from multiple vendors.
+    </p>
+    
+    <p>
+        The Lantern team observed that endpoints from the vendor Epic Systems Corporation do not populate the "publisher" field in the Conformance Statement. Of the 339 Epic endpoints responding with a valid Conformance Statement, none of those Capability Statements included a "publisher" field.
+    </p>
+
+    <h3>
+        Details:
+    </h3>
+
+    <p>
+        As of April 22, 2020:
+    </p>
+    <ul>
+        <li>
+            <p>Only Epic endpoints do not include the "publisher" field</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT DISTINCT list_source 
+FROM fhir_endpoints 
+WHERE 
+    capability_statement::json ->> 'fhirVersion' IS NOT NULL
+    AND 
+    capability_statement::json ->> 'publisher' IS NULL
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>360 Epic endpoints were retrieved from https://open.epic.com/MyApps/EndpointsJson</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT COUNT(*)
+FROM fhir_endpoints 
+WHERE list_source = 'https://open.epic.com/MyApps/EndpointsJson'
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>339 Epic endpoints returned a valid Conformance Statement</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT COUNT(*) 
+FROM fhir_endpoints 
+WHERE 
+    capability_statement::json ->> 'fhirVersion' IS NOT NULL
+    AND
+    list_source = 'https://open.epic.com/MyApps/EndpointsJson'
+;
+                </code>
+            </pre>
+        </li>
+        <li>
+            <p>339 Epic endpoints did not include the "publisher" field in their Conformance Statement</p>
+            <p>Query:</p>
+            <pre>
+                <code>
+SELECT COUNT(*) 
+FROM fhir_endpoints 
+WHERE 
+    capability_statement::json ->> 'fhirVersion' IS NOT NULL
+    AND
+    capability_statement::json ->> 'publisher' IS NULL
+;
+                </code>
+            </pre>
+        </li>
+    </ul>
+
 </div>
+
